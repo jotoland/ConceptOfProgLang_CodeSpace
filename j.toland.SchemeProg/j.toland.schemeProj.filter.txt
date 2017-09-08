@@ -1,0 +1,10 @@
+; Author: John Toland
+; CS3361
+; 11/21/16
+
+(define filter (lambda (F L)                          	; Function filter with arguments F L 
+   (cond ((null? L) '())                              	; If L is null, return the empty list (base case).
+      ((F (car L)) (cons (car L) (filter F (cdr L)))) 	; Call F: if true cons the car of L with recursive call.
+      (else (filter F (cdr L))))))                  	; if false, then just recursive call.
+(display (filter(lambda (X) (< X 5)) '(10 3 2 1 9)))	; Display list of all elements less than 5.
+							

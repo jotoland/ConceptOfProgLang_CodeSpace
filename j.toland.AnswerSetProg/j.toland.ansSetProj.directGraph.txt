@@ -1,0 +1,28 @@
+%John Toland_11/16/16_CS3361 Project 2: Answer Sets
+%Determines if the graph is strong or weakly connected or neither
+
+%This is how I am representing a strongly connected graph
+
+%Nodes
+node(1..3).
+%Direction
+direct(1,2). direct(2,1). direct(1,3). direct(3,1). direct(2,3). direct(3,2).
+
+
+%Here is the code
+
+%Define
+directPath(X,Y) :- direct(X,Y).
+directPath(X,X) :- path(X,X).
+directPath(X,Y) :- directPath(X,Y), direct(Z,Y), node(X), node(Y), node(Z).
+
+edge(X,Y) :- direct(X,Y), node(X), node(Y).
+edge(X,Y) :- direct(Y,X), node(Y), node(X).
+
+path(X,Y) :- edge(X,Y).
+path(X,Y) :- path(X,Z), edge(Y,Z), node(X), node(Y), node(Z).
+path(X,X) :- node(X).
+
+neither :- not path(X,Y), node(X), node(Y).
+weak :- not neither, not directPath(X,Y), node(X), node(Y).
+strong :- not neither, not weak.

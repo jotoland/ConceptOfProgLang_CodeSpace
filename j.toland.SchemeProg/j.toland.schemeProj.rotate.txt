@@ -1,0 +1,14 @@
+; Author: John Toland
+; CS3361
+; 11/21/16
+
+
+(define (rotate L L1) (rotate2 L L1 0))                   ; Function rotate with arguments L and L1.
+(define (rotate2 L L1 count)                              ; Function rotate2 with arguments L, L1, and count.
+   (if(= count (length L)) L1 (rotate2 (append (cdr L)    ; If count == size of L, return L1 (base case).
+      (cons(car L) '()))                                  ; Else, add the rotation to the list and call rotate2
+      (cons (append (cdr L)
+      (cons (car L) '())) L1) (+ count 1))))              ; rotated list, the updated saved list, and count++.
+(define L '(1 2 3 4 5))                                   ; Initial list
+(define L1 '())                                           ; Empty list used to store the rotations
+(display (rotate L L1))                                   ; Display rotations.
